@@ -5,11 +5,13 @@
  */
 package dto;
 
+import java.io.Serializable;
+
 /**
  *
  * @author Dina Ashraf
  */
-public class Product {
+public class Product implements Serializable{
     private String productName;
     private String mainImageUrl;
     private ImagesUrl otherImagesUrls;

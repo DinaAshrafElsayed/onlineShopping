@@ -351,7 +351,7 @@ public class DataBaseHandler implements DataBaseAdminHandlerInterface, DataBaseH
     private ArrayList<Product> searchWithCategoryAndName(String category, String productName, ArrayList<Product> productList) {
         try {
             PreparedStatement preparedStatment2 = getConnection().prepareStatement("select * from products"
-                    + " where (categoryName like ?) OR (productName like ?)");
+                    + " where (categoryName like ?) and (productName like ?)");
             preparedStatment2.setString(1, "%" + category + "%");
             preparedStatment2.setString(2, "%" + productName + "%");
             ResultSet resultSet2 = preparedStatment2.executeQuery();
@@ -373,7 +373,7 @@ public class DataBaseHandler implements DataBaseAdminHandlerInterface, DataBaseH
     private ArrayList<Product> SearchProductGeneric(String category, String productName, double productPrice, ArrayList<Product> productList) {
         try {
             PreparedStatement preparedStatment1 = getConnection().prepareStatement("select * from products"
-                    + " where (categoryName like ?) OR (productName like ?) OR (price <= ?)");
+                    + " where (categoryName like ?) and (productName like ?) and (price <= ?)");
             preparedStatment1.setString(1, "%" + category + "%");
             preparedStatment1.setString(2, "%" + productName + "%");
             preparedStatment1.setDouble(3, productPrice);

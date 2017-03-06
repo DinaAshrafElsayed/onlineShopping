@@ -53,11 +53,11 @@ public class Login extends HttpServlet {
         if (user != null) {
             if (remember != null) {
                 if (remember.equals("remember")) {
-                    Cookie cookie = new Cookie("user", user.getFirstName());
+                    Cookie cookie = new Cookie("shoppingCookie", user.getFirstName());
                     cookie.setMaxAge(24 * 60 * 60);
                     response.addCookie(cookie);
                     System.out.println("cookie created");
-
+                    
                 }
             }
             HttpSession session = request.getSession(true);

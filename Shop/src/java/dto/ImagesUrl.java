@@ -5,13 +5,14 @@
  */
 package dto;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  *
  * @author Dina Ashraf
  */
-public class ImagesUrl {
+public class ImagesUrl implements Serializable{
     private ArrayList<String> ImagesUrl = new ArrayList<>();
 
     /**
