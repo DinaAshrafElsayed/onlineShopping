@@ -3,7 +3,14 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+<<<<<<< HEAD
             <file>file:/D:/JspProject/onlineShopping/Shop/web/registerPage.jsp</file>
+=======
+            <file>file:/E:/ITI/servlets&amp;jsp/project/gitProject/Shop/web/SpecialOfferBody.jsp</file>
+            <file>file:/E:/ITI/servlets&amp;jsp/project/gitProject/Shop/web/bodyProduct.jsp</file>
+            <file>file:/E:/ITI/servlets&amp;jsp/project/gitProject/Shop/web/specialOffer.jsp</file>
+            <file>file:/E:/ITI/servlets&amp;jsp/project/gitProject/Shop/web/index.jsp</file>
+>>>>>>> 4892bbb32dc59f8d634810b5f5d6ea861ec3dd95
         </group>
     </open-files>
 </project-private>

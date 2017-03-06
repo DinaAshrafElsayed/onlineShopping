@@ -12,20 +12,23 @@ import java.util.ArrayList;
  * @author Dina Ashraf
  */
 public class ImagesUrl {
+<<<<<<< HEAD
+=======
+
+>>>>>>> 4892bbb32dc59f8d634810b5f5d6ea861ec3dd95
     private ArrayList<String> ImagesUrl = new ArrayList<String>();
 
     /**
      * @return the ImagesUrl
      */
-    public boolean addItem(String url)
-    {
+    public boolean addItem(String url) {
         return ImagesUrl.add(url);
     }
+
     public ArrayList<String> getImagesUrl() {
         return ImagesUrl;
     }
-    
+
     // updates
-    
     //end of updates
 }

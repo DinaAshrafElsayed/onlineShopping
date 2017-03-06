@@ -1,5 +1,7 @@
+<%@page import="dto.Product"%>
+<%@page import="java.util.ArrayList"%>
 <%@page import="java.sql.ResultSet"%>
-<%@page import="Database.Database"%>
+<%@page import="Database.DataBaseHandler"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@include file="AdminHead.jsp" %>
 <script>
@@ -36,13 +38,15 @@
         <select  class="form-control" id="name">
 
             <%
-
-                Database logic = new Database();
-                ResultSet rs = logic.ShowAllProduct();
-                while (rs.next()) {
+                DataBaseHandler instance = DataBaseHandler.getinstance();
+                ArrayList<Product> products = instance.getAllproducts();
+                for (Product product : products) {
             %>
-            <option id="old<%= rs.getString(1)%>" class="<%= rs.getString(5)%>" value="<%= rs.getString(1)%>"><%= rs.getString(2)%></option>
-            <% }%>
+            <option id="old<%=product.getId()%>" class="<%=product.getQuantity()%>" value="<%=product.getId()%>">
+                <%= product.getProductName()%>
+            </option>
+            <% }
+            %>
 
         </select>
 

@@ -23,7 +23,7 @@ public class Test {
         DataBaseHandler db = DataBaseHandler.getinstance();
         CreditCard card = new CreditCard(1234, LocalDate.now(), 10000);
         User u = new User("ahmed@gmail.com", "images/profile.jpg", "male", "ahmed", "labib", LocalDate.now(), "123", "012345678", "alex", "user", card);
-        if (db.login("ahmed@gmail.com","123")!=null) 
+        if (db.login("dina@gmail.com","123")!=null) 
         {
             ImagesUrl otherimages = new ImagesUrl();
             otherimages.addItem("image1");
@@ -40,11 +40,14 @@ public class Test {
             otherimages4.addItem("image2");
             otherimages4.addItem("image3");
 
-            //Product newproduct = new Product("iphone", "main imagefdsfd url", otherimages, 5, 10, "mobioe", 20, "phasdaone");
-            //Product newproduct2 = new Product("samsung", "main imagefdsfd url", otherimages2, 5, 20, "mobioe", 20, "phasdaone");
-            //Product newproduct3 = new Product("hp", "main imagefdsfd url", otherimages3, 5, 3, "mobioe", 20, "phasdaone");
-            //Product newproduct4 = new Product("lenovo", "main imagefdsfd url", otherimages4, 5, 2, "mobioe", 20, "phasdaone");
+            Product newproduct = new Product("iphone", "themes/images/products/5.jpg", otherimages, 5, 10, "mobioe", 20, "phasdaone");
+            Product newproduct2 = new Product("samsung", "themes/images/products/6.jpg", otherimages2, 5, 20, "mobioe", 20, "phasdaone");
+            Product newproduct3 = new Product("hp", "themes/images/products/6.jpg", otherimages3, 5, 3, "mobioe", 20, "phasdaone");
+            Product newproduct4 = new Product("lenovo", "themes/images/products/5.jpg", otherimages4, 5, 2, "mobioe", 20, "phasdaone");
             
+            Product newproduct5 = new Product("camera", "themes/images/products/5.jpg", otherimages4, 5, 2, "mobioe", 0, "COMPUTER");
+            
+            db.addProduct(newproduct5);
             ArrayList<Product> disproductArray = db.getAllproducts();
             System.out.println(disproductArray.size());
             System.out.println(db.updateOrderStatus("ahmed@gmail.com", 1));

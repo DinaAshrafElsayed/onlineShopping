@@ -1,18 +1,17 @@
 package Database;
 
+import dto.ImagesUrl;
+import dto.Product;
 import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.PrintWriter;
 import java.util.Iterator;
 import java.util.List;
-import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.fileupload.FileItem;
+import org.apache.commons.fileupload.FileItemFactory;
 import org.apache.commons.fileupload.FileUploadException;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
@@ -24,42 +23,29 @@ public class servletAddProduct extends HttpServlet {
     private int quantity;
     private double discount;
     private String category;
-    private int flag;
+    DataBaseHandler instance;
+    ImagesUrl images = new ImagesUrl();
+    int i = 0;
+    private String mainImage;
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
-        PrintWriter out = response.getWriter();
-
-        try {
-            DiskFileItemFactory factory = new DiskFileItemFactory();
-            ServletContext servletContext = this.getServletConfig().getServletContext();
-            File repository = (File) servletContext.getAttribute("javax.servlet.context.tempdir");
-            factory.setRepository(repository);
+        boolean isMultipart = ServletFileUpload.isMultipartContent(request);
+        if (!isMultipart) {
+        } else {
+            FileItemFactory factory = new DiskFileItemFactory();
             ServletFileUpload upload = new ServletFileUpload(factory);
-            List<FileItem> items = upload.parseRequest(request);
-
-            Iterator<FileItem> iter = items.iterator();
-            while (iter.hasNext()) {
-                FileItem item = iter.next();
-                if (!item.isFormField()) {
-                    String fieldName = item.getFieldName();
-                    String fileName = item.getName();
-                    String contentType = item.getContentType();
-                    long sizeInBytes = item.getSize();
-                    String filePath = getServletContext().getRealPath("") + File.separator + "upload" + File.separator + "product" + File.separator;
-
-                    InputStream uploadedStream = item.getInputStream();
-                    FileItem fi = (FileItem) item;
-                    fullName = fileName;
-                    //out.print(filePath);
-                    File file = new File(filePath + fullName);
-                    fi.write(file);
-                    uploadedStream.close();
-
-                } else {
-
+            List items = null;
+            try {
+                items = upload.parseRequest(request);
+            } catch (FileUploadException e) {
+                e.printStackTrace();
+            }
+            Iterator itr = items.iterator();
+            while (itr.hasNext()) {
+                FileItem item = (FileItem) itr.next();
+                if (item.isFormField()) {
                     String temp = item.getFieldName();
                     String tempValue = item.getString();
                     if (temp.equals("name")) {
@@ -80,35 +66,37 @@ public class servletAddProduct extends HttpServlet {
                     if (temp.equals("category")) {
                         category = tempValue;
                     }
+                } else {
+                    try {
+                        String itemName = item.getName();
+                        System.out.println(itemName);
+
+                        File savedFile = new File("G://"  + itemName);
+                        item.write(savedFile);
+                        images.addItem("G://"  + itemName);
+                        if (i < 1) {
+                            mainImage = "G://"  + itemName;
+                        }
+                        i++;
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
 
                 }
             }
-
-        } catch (FileUploadException ex) {
-
-            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/error.jsp");
-            dispatcher.forward(request, response);
-
-        } catch (Exception ex) {
-
         }
-        Database db = new Database();
-
-        flag = db.addProuduct(name, description, price, quantity, fullName, discount, category);
-        RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/addProduct.jsp");
-        dispatcher.include(request, response);
-        if (flag != 0) {
-//            out.print("<div id=\"openModal\" class=\"modalDialog\">\n"
-//                    + "	<div>\n"
-//                    + "		<a href=\"#close\" title=\"Close\" class=\"close\">X</a>\n"
-//                    + "		<h2>Modal Box</h2>\n"
-//                    + "		<p>product added successfuly</p>\n"
-//                    + "	</div>\n"
-//                    + "</div>");
-        } else {
-
+        instance = DataBaseHandler.getinstance();
+        Product product = new Product(name, mainImage, images, quantity, price, description, discount, category);
+        boolean flag = instance.addProduct(product);
+        if(flag){
+            request.setAttribute("valid", "yes");
+            request.getRequestDispatcher("/addProduct.jsp").forward(request, response);
         }
-
+        else{
+            request.removeAttribute("valid");
+            request.getRequestDispatcher("/addProduct.jsp").forward(request, response);
+            
+        }
     }
 
 }

@@ -719,4 +719,17 @@ public class DataBaseHandler implements DataBaseAdminHandlerInterface, DataBaseH
 
     // updates
     //end of updates
+    @Override
+    public int editQuantity(int id, int quantity) {
+        int flag = 0;
+        try {
+            PreparedStatement st = getConnection().prepareCall("update products set quantity=? where product_id=?");
+            st.setInt(1, quantity);
+            st.setInt(2, id);
+            flag = st.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(DataBaseHandler.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return flag;
+    }
 }
