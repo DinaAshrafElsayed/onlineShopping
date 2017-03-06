@@ -12,7 +12,7 @@ import java.util.ArrayList;
  * @author Dina Ashraf
  */
 public class ImagesUrl {
-    private ArrayList<String> ImagesUrl = new ArrayList<>();
+    private ArrayList<String> ImagesUrl = new ArrayList<String>();
 
     /**
      * @return the ImagesUrl
