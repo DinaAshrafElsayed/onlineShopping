@@ -20,6 +20,7 @@ public interface DataBaseAdminHandlerInterface
     public boolean removeProduct(Product product);
     public ArrayList<User> getAllUsers();
     public User getUser(String email);
+    public int editQuantity(int id,int quantity);
     // updates
     
     //end of updates

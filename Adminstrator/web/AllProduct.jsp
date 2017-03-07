@@ -35,20 +35,21 @@
     </tr>
     <%
 
-                Database logic = new Database();
-                ResultSet rs = logic.ShowAllProduct();
-                while (rs.next()) {
-                    String id= rs.getString(1);
+        Database logic = new Database();
+        ResultSet rs = logic.ShowAllProduct();
+        while (rs.next()) {
+            String id = rs.getString(1);
     %>
-    <tr id="<%= id %>">
+    <tr id="<%= id%>">
         <td><%= rs.getString(2)%></td>
         <td><%= rs.getString(5)%></td>
         <td><%= rs.getString(6)%></td>
-        <td><a href="updateProduct.jsp?id=<%= id %>">update</a></td>
-        <td onclick="deletep(<%= id %>);">delete</td>
+        <td><a href="updateProduct.jsp?id=<%= id%>">update</a></td>
+        <td onclick="deletep(<%= id%>);">delete</td>
 
     </tr>
-    <% }%>
+    <% }
+    %>
 
 </table>
 

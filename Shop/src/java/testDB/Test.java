@@ -40,11 +40,12 @@ public class Test {
             otherimages4.addItem("image2");
             otherimages4.addItem("image3");
 
-            //Product newproduct = new Product("iphone", "main imagefdsfd url", otherimages, 5, 10, "mobioe", 20, "phasdaone");
-            //Product newproduct2 = new Product("samsung", "main imagefdsfd url", otherimages2, 5, 20, "mobioe", 20, "phasdaone");
-            //Product newproduct3 = new Product("hp", "main imagefdsfd url", otherimages3, 5, 3, "mobioe", 20, "phasdaone");
-            //Product newproduct4 = new Product("lenovo", "main imagefdsfd url", otherimages4, 5, 2, "mobioe", 20, "phasdaone");
-            
+            Product newproduct = new Product("iphone", "main imagefdsfd url", otherimages, 5, 10, "mobioe", 20, "phasdaone");
+            Product newproduct2 = new Product("samsung", "main imagefdsfd url", otherimages2, 5, 20, "mobioe", 20, "phasdaone");
+            Product newproduct3 = new Product("hp", "main imagefdsfd url", otherimages3, 5, 3, "mobioe", 20, "phasdaone");
+            Product newproduct4 = new Product("lenovo", "main imagefdsfd url", otherimages4, 5, 2, "mobioe", 20, "phasdaone");
+            db.addProduct(newproduct);
+            db.addProduct(newproduct2);
             ArrayList<Product> disproductArray = db.getAllproducts();
             System.out.println(disproductArray.size());
             System.out.println(db.updateOrderStatus("ahmed@gmail.com", 1));

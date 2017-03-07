@@ -5,8 +5,12 @@
         <div id="welcomeLine" class="row">
             <div class="span6" id="userName">Welcome <strong>
                     <%
-                        User u = (User) session.getAttribute("user");
-                        out.print(u.getFirstName());
+                        User u = null;
+                        if (session.getAttribute("user") != null) {
+                            u = (User) session.getAttribute("user");
+                            out.print(u.getFirstName());
+                        }
+
                     %>
                 </strong></div>
             <div class="span6">
@@ -14,8 +18,7 @@
 
                     <span><font><b>balance</b></font></span>
                     <span class="btn btn-mid" id="userBalance">
-                        <%
-                            out.print(u.getCreditCard().getBalance());
+                        <%                            out.print(u.getCreditCard().getBalance());
                         %>
                     </span>
                     <span class="">£</span>
